@@ -1,4 +1,4 @@
-# simple_switch
+# Stemplate
 ### a core / react / nodejs template.
 #### based on https://github.com/ido-ofir/core
 
