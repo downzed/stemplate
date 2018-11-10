@@ -6,7 +6,7 @@ var app = express();
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use('/', express.static(path.resolve(__dirname, '../')));
+app.use('/', express.static(path.resolve(__dirname, '../client/output')));
 
 var fsTools = require('./fileSystem/fileSystem.js');
 // var configPath;// = 'source/plugins/Stemplate/config/';
@@ -30,7 +30,7 @@ Node Server:
 
 --config-path, -cp                  configuration folder, relative to 'root' folder,
                                     exapmle: source/path/to/config.
-                                    this app uses: source/plugins/Stemplate/config/
+                                    this app uses: ${ configPath }
   `);
   // process.exit();
 };
@@ -54,12 +54,12 @@ app.post('/loadFile', (req, res) => {
 });
 
 app.listen(4000, ()=> {
-  if (configPath) console.log('4000')
+  if (configPath) console.log('http://localhost:4000');
   else {
     console.warn('missing config path')
-    configPath = 'source/plugins/Stemplate/config/';
+    configPath = path.resolve(__dirname, '../client/source/plugins/Stemplate/config') + '/';
     console.log('running default config folder')
     help()
-    console.log('4000')
+    console.log('http://localhost:4000');
   }
 })

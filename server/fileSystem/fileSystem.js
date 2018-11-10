@@ -34,7 +34,8 @@ var walker, walkerOptions;
 module.exports = {
   save: (req, res, configPath) => {
 
-    let jsonFile = `${configPath}/${req.body.dir}/modified.json`;
+    let jsonFile = path.join(configPath, req.body.dir, 'modified.json');
+    // let jsonFile = `${configPath}/${req.body.dir}/modified.json`;
 
     fs.writeFile(jsonFile, req.body.fileData, encoding, (err) => {
         if (err) {
@@ -51,7 +52,7 @@ module.exports = {
     let jsonFile = '';
 
     function writeFirst(callback){
-      jsonFile = `${configPath}/${req.body.dir}/modified.json`;
+      jsonFile = path.join(configPath, req.body.dir, 'modified.json');
 
       fs.writeFile(jsonFile, req.body.fileData, encoding, (err) => {
           if (err) {
@@ -64,7 +65,8 @@ module.exports = {
     };
 
     function writeFile(){
-      jsonFile = `${configPath}/${req.body.dir}/${req.body.fileName}.json`;
+      let jsonFile = path.join(configPath, req.body.dir, `${req.body.fileName}.json`);
+      // jsonFile = `${configPath}/${req.body.dir}/${req.body.fileName}.json`;
 
       fs.writeFile(jsonFile, req.body.fileData, encoding, (err) => {
         if (err) {
@@ -175,7 +177,8 @@ module.exports = {
 
   loadFile: (req, res, configPath)=>{
     let { filename, dir } = req.body;
-    var fullFilePath = `${ configPath }${ dir }/${ filename }`;
+    var fullFilePath = path.join(configPath, dir, filename);
+    // var fullFilePath = `${ configPath }${ dir }/${ filename }`;
 
     getTheFile(fullFilePath);
 
