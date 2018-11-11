@@ -124,6 +124,7 @@ module.exports = {
                         height:'100%',
                         overflow: 'hidden',
                         position: 'relative',
+                        background: core.theme('backgrounds.light_gray')
                     },
 
                     content: {
@@ -134,6 +135,7 @@ module.exports = {
                         right: 0,
                         overflow: 'hidden',
                         backgroundColor: this.backgrounds.content,
+                        padding: 16
                     },
                 }
                 return(styles[s]);

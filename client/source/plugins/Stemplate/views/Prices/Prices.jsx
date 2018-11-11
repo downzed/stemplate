@@ -1,3 +1,4 @@
+import Card from '@material-ui/core/Card';
 
 module.exports = {
     name: "Prices",
@@ -39,9 +40,9 @@ module.exports = {
             render() {
 
                 return (
-                    <div>
-                        Prices Page
-                    </div>
+                    <Card style={{display: 'inline-flex', padding: 24, flexDirection: 'column', width: 300, height: 180, justifyContent: 'center', alignItems: 'center'}}>
+                        <span style={{fontSize: 64, color: core.theme("colors.darkGray")}}>Prices</span>
+                    </Card>
                 )
             }            
         }

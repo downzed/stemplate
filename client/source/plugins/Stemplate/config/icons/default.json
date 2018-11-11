@@ -24,6 +24,12 @@
     "settings": "settings",
     "examples": "school"
   },
+  "topBar": {
+    "user": "person",
+    "signIn": "input",
+    "signOut": "launch",
+    "search": "search"
+  },
   "navigate": {
     "close": "close",
     "up": "keyboard_arrow_up",

@@ -40,6 +40,7 @@ module.exports = {
                     borderDark: core.theme("colors.borderDark"),
                     secondary: core.theme("colors.secondary"),
                     gray: core.theme("colors.gray"),
+                    white: core.theme("colors.white"),
                     b12: core.theme('transparent.black_12'),
                     b14: core.theme('transparent.black_14'),
                     b20: core.theme('transparent.black_20'),
@@ -47,7 +48,7 @@ module.exports = {
 
                 this.backgrounds = {
                     blue: core.theme("colors.blue1"),
-                    nav: core.theme("backgrounds.nav"),
+                    nav: core.theme("backgrounds.sideBar"),
                 };
 
                 this.icons = {
@@ -89,6 +90,7 @@ module.exports = {
                         boxShadow: `0px 2px 4px -1px ${this.colors.b12}, \
                                     0px 4px 5px  0px ${this.colors.b14}, \
                                     0px 1px 10px 0px ${this.colors.b20}`,
+                        padding: '8px 0'
                     },
                     placeHolderContainer: {
                         transition: 'all .25s ease-out',
@@ -103,7 +105,7 @@ module.exports = {
                     rowContainer: {
                         width: this.units.nav.maxWidth,
                         padding: '0',
-                        height: 40,
+                        height: 48,
                         cursor: 'pointer',
                         zIndex: 1,
                     },
@@ -119,7 +121,7 @@ module.exports = {
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         fontSize: this.units.fontSize,
-                        color: this.colors.gray,
+                        color: this.colors.white,
                     },
                     rowIcon: {
                         marginRight: 6,
@@ -191,7 +193,7 @@ module.exports = {
             renderItemText(item, isActive) {
                 
                 let textStyle = { ...this.styles('rowLabel'), 
-                    color: isActive ? this.colors.secondary : this.colors.gray
+                    color: this.colors.white
                 };
 
                 return (
@@ -204,7 +206,7 @@ module.exports = {
             renderItemIcon(icon, isActive) {
                 
                 let listStyle = { ...this.styles('rowIcon'), 
-                    color: isActive ? this.colors.secondary : this.colors.gray
+                    color: this.colors.secondary
                 };
 
                 return (
@@ -226,11 +228,12 @@ module.exports = {
 
                 let itemStyle = {
                     ...this.styles('rowContainer'), 
+                    background: isActive ? "rgba(0, 0, 0, 0.08)" : "transparent",
                     borderTop: item.renderTopBorder ? `1px solid ${this.colors.borderDark}` : 'none'
                 }
                 let innerStyle = {
                     ...this.styles('rowInner'), 
-                    background: item.disabled ? 'none' : isActive ? this.backgrounds.blue : 'none'
+                    opacity:  isActive ? 1 : .65
                 }
 
                 return (

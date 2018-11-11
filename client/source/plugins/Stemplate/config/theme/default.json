@@ -3,8 +3,10 @@
         "black": "#333333",
         "dark": "#333333",
         "gray": "#999999",
-        "secondary": "#2979ff",
-        "primary": "#01579b",
+        "darkGray": "#666666",
+        "secondary": "#59b8b8",
+        "primary": "#3e435f",
+        "purple": "#786fa6",
         "white": "#ffffff",
         "boxShadow": "#cacaca",
         "borderDark": "#4e4e4e",
@@ -12,11 +14,14 @@
     },
     "backgrounds": {
         "default": "#ffffff",
+        "white": "#ffffff",
         "nav": "#333333",
         "primary": "#004175",
-        "light_gray": "#ededed",
+        "light_gray": "#efefef",
         "menu": "#efefef",
-        "blue": "#007AFF"
+        "blue": "#007AFF",
+        "root": "#efefef",
+        "sideBar": "#484d67"
     },
     "transparent": {
         "black_12": "#0000001F",
