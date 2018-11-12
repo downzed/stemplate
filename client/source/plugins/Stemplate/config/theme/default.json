@@ -4,9 +4,10 @@
         "dark": "#333333",
         "gray": "#999999",
         "darkGray": "#666666",
-        "secondary": "#59b8b8",
-        "primary": "#3e435f",
-        "purple": "#786fa6",
+        "secondary": "#ff4e50",
+        "primary": "#303641",
+        "third": "#88da4b",
+        "fourth": "#4ea9d6",
         "white": "#ffffff",
         "boxShadow": "#cacaca",
         "borderDark": "#4e4e4e",
@@ -21,7 +22,7 @@
         "menu": "#efefef",
         "blue": "#007AFF",
         "root": "#efefef",
-        "sideBar": "#484d67"
+        "sideBar": "#303641"
     },
     "transparent": {
         "black_12": "#0000001F",

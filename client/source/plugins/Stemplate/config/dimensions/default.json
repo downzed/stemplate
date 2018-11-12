@@ -1,13 +1,13 @@
 {
   "nav": {
-    "width": 220,
-    "maxWidth": 220,
+    "width": 225,
+    "maxWidth": 225,
     "iconSize": 20,
     "fontSize": 14,
     "zIndex": 1101
   },
   "appBar": {
-    "height": 60,
+    "height": 80,
     "zIndex": 1102
   },
   "expandingMenu": {

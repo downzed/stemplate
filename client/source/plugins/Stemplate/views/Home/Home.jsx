@@ -44,8 +44,8 @@ module.exports = {
             render() {
 
                 return (
-                    <Card style={{display: 'inline-flex', padding: 24, flexDirection: 'column', width: 300, height: 180, justifyContent: 'center', alignItems: 'center'}}>
-                        <span style={{fontSize: 64, color: core.theme("colors.darkGray")}}>Home</span>
+                    <Card style={{display: 'inline-flex', padding: 12, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.1)'}}>
+                        <span style={{fontSize: 32, color: core.theme("colors.darkGray")}}>Home</span>
                     </Card>
                 )
             }            

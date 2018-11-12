@@ -90,7 +90,7 @@ module.exports = {
                         boxShadow: `0px 2px 4px -1px ${this.colors.b12}, \
                                     0px 4px 5px  0px ${this.colors.b14}, \
                                     0px 1px 10px 0px ${this.colors.b20}`,
-                        padding: '8px 0'
+                        // padding: '8px 0'
                     },
                     placeHolderContainer: {
                         transition: 'all .25s ease-out',

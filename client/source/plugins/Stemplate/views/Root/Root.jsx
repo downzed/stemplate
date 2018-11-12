@@ -135,7 +135,7 @@ module.exports = {
                         right: 0,
                         overflow: 'hidden',
                         backgroundColor: this.backgrounds.content,
-                        padding: 16
+                        padding: 12
                     },
                 }
                 return(styles[s]);
