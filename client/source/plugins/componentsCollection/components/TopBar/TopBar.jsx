@@ -24,7 +24,7 @@ module.exports = {
                 let { logedIn } = this.state;
 
                 return (
-                    <AppBar position="static" style={{boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.1)', height: 80, alignItems: 'center', flexDirection: 'row', background: core.theme('backgrounds.white'), justifyContent: 'space-between'}}>
+                    <AppBar position="static" style={{boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.1)', height: 60, alignItems: 'center', flexDirection: 'row', background: core.theme('backgrounds.white'), justifyContent: 'space-between'}}>
                         <div style={{display: 'flex', height: '100%', width: 225, alignItems: 'center', justifyContent: 'space-between', padding: '0 16px 0 8px', background: core.theme('colors.primary')}}>
                             <IconButton onClick={e => {}} style={{width: 48, height: 48, marginRight: 8}}>
                                 <Icon style={{color: core.theme('colors.white')}}>{core.icons('general.menu')}</Icon>

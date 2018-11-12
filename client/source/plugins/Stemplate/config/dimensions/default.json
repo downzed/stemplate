@@ -7,7 +7,7 @@
     "zIndex": 1101
   },
   "appBar": {
-    "height": 80,
+    "height": 60,
     "zIndex": 1102
   },
   "expandingMenu": {
