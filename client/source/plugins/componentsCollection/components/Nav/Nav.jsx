@@ -27,7 +27,7 @@ const styles = {
     rowInner: {
         display: 'flex',
         flex: 1,
-        padding: '12px 16px 12px 16px',
+        padding: '12px 16px',
         alignItems: 'center',
     },
     rowIcon: {
@@ -55,11 +55,6 @@ module.exports = {
         var { React } = core.imports;
 
         return {
-
-            getInitialState(){
-                return {
-                }
-            },
 
             getListData(listPosition){
                 switch(listPosition) {
@@ -92,7 +87,6 @@ module.exports = {
                 let { activeView } = this.props;
 
                 let view = item.view || null;
-                if ( item.disabled ) return null;
                 
                 let isActive = (activeView === item.view);
 
@@ -100,8 +94,8 @@ module.exports = {
                     ...styles.rowContainer, 
                     background: isActive ? "rgba(0, 0, 0, 0.08)" : "transparent",
                     borderTop: item.renderTopBorder ? `1px solid ${core.theme('colors.borderDark')}` : 'none',
-                    borderLeft: isActive ? `5px solid  ${core.theme('colors.third')}`: 'none',
-                    paddingLeft: isActive ? 0 : 5
+                    borderLeft: isActive ? `3px solid  ${core.theme('colors.third')}`: 'none',
+                    paddingLeft: isActive ? 0 : 3
                 }
                 let innerStyle = {
                     ...styles.rowInner, 
