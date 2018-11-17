@@ -22,20 +22,27 @@ module.exports = {
 
             render() {
                 let { logedIn } = this.state;
+                let { handleNavState, navWidth, navIsOpen } = this.props;
 
                 return (
                     <AppBar position="static" style={{boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.1)', height: 60, alignItems: 'center', flexDirection: 'row', background: core.theme('backgrounds.white'), justifyContent: 'space-between'}}>
-                        <div style={{display: 'flex', height: '100%', width: 225, alignItems: 'center', justifyContent: 'space-between', padding: '0 16px 0 8px', background: core.theme('colors.primary')}}>
-                            <IconButton onClick={e => {}} style={{width: 48, height: 48, marginRight: 8}}>
+                        <div style={{ width: navWidth, overflow: 'hidden', transition: 'all 0.25s ease-out 0s', display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px 0 6px', background: core.theme('colors.primary')}}>
+                            {/* <IconButton onClick={e => {}} style={{width: 48, height: 48, marginRight: 8}}>
                                 <Icon style={{color: core.theme('colors.white')}}>{core.icons('general.menu')}</Icon>
-                            </IconButton>
+                            </IconButton> */}
                             <div style={{display: 'flex', alignItems: 'center'}}>
-                                <img src="resources/images/logo.png" style={{height: 28, maxWidth: '100%', marginRight: 6, marginBottom: 6}}/>
-                                <span style={{fontSize: 18, letterSpacing: 2}}>Stemplate</span>
+                                <IconButton onClick={() => {}} style={{width: 48, height: 48}}>
+                                    <img src="resources/images/logo.png" style={{height: 26, maxWidth: '100%'}}/>
+                                </IconButton>
+                                {/* <img src="resources/images/logo.png" style={{height: 28, maxWidth: '100%', marginLeft: 6, marginBottom: 6}}/> */}
+                                <span style={{fontSize: 18, letterSpacing: 2, padding: '0 6px'}}>Stemplate</span>
                             </div>
                         </div>
-                        <div style={{display: 'flex', height: '100%', alignItems: 'center', flex: 1, justifyContent: 'space-between', padding: '0 16px'}}>
+                        <div style={{display: 'flex', height: '100%', alignItems: 'center', flex: 1, justifyContent: 'space-between', padding: '0px 16px 0 8px'}}>
                             <div style={{display: 'flex', alignItems: 'center'}}>
+                                <IconButton onClick={handleNavState} style={{width: 48, height: 48, marginRight: 8}}>
+                                    <Icon style={{color: core.theme('colors.dark')}}>{navIsOpen ? core.icons('general.close') : core.icons('general.menu')}</Icon>
+                                </IconButton>
                                 <Avatar style={{width: 32, height: 32, background: core.theme('colors.third'), marginRight: 12}}><Icon>{core.icons('topBar.user')}</Icon></Avatar>
                                 <div style={{display: 'flex', flexDirection: 'column'}}>
                                     <span style={{fontSize: 14, display: 'flex', alignItems: 'center', color: core.theme('colors.primary'), fontWeight: 500}}>Ido Ofir</span>

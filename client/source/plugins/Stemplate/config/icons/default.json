@@ -7,7 +7,8 @@
     "addFolder": "create_new_folder",
     "folderShared": "folder_shared",
     "download": "file_download",
-    "arrow_right": "arrow_right"
+    "arrow_right": "arrow_right",
+    "close": "close"
   },
   "notify":{
     "error": "error",

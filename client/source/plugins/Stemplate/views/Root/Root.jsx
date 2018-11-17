@@ -1,5 +1,8 @@
 var routes = require('./routes');
 
+const navOpenedWidth = 180;
+const navClosedWidth = 60;
+
 module.exports = {
     name: 'Root',
     description: '',
@@ -35,9 +38,9 @@ module.exports = {
             getInitialState() {
                 return {
                     text: 'Root',
-                    navIsOpen: false,
                     activeView: 'home',
-                    start: false
+                    start: false,
+                    navWidth: navClosedWidth
                 };
             },
 
@@ -130,7 +133,8 @@ module.exports = {
                     content: {
                         position: 'absolute',
                         top:  this.units.appBarHeight,
-                        left: this.units.navWidth,
+                        left: this.state.navWidth,
+                        transition: 'all 0.25s ease-out 0s',
                         bottom: 0,
                         right: 0,
                         overflow: 'hidden',
@@ -142,8 +146,7 @@ module.exports = {
             },
 
             render() {
-                let { activeView, start } = this.state;
-
+                let { activeView, start, navWidth } = this.state;
                 // let { isLoggedIn } = this.props;
 
                 // let authToken = localStorage.getItem('authToken');
@@ -166,8 +169,8 @@ module.exports = {
                     <Login>
                         <div style={ this.styles('root') }>
                             <Lightbox />
-                            <TopBar/>
-                            <Nav handleViews={this.handleNav} activeView={activeView} />
+                            <TopBar handleNavState={() => {this.setState({navWidth: (navWidth === navClosedWidth) ? navOpenedWidth : navClosedWidth})}} navWidth={navWidth} navIsOpen={navWidth === navOpenedWidth} />
+                            <Nav handleViews={this.handleNav} activeView={activeView} navWidth={navWidth} />
                             
                             <Notify />
                             <Popup />
@@ -175,7 +178,7 @@ module.exports = {
                             <Snackbar />
 
                             <div style={ this.styles('content') }>
-                            <Router routes={routes} defaultRoute={'/home'}  onNavigation={this.onNavigation}/>
+                            <Router routes={routes} defaultRoute={'/home'}  onNavigation={this.onNavigation} />
                             </div>
                         </div>
                     </Login>
