@@ -31,8 +31,8 @@ module.exports = {
             getInitialState() {
 
                 return {
-                    email: 'koko@loko.com',
-                    password: 'loko',
+                    email: 'idoofirs@gmail.com',
+                    password: '123',
                     name: 'Koko',
                     signup: false,
                     ranAuth: false,
@@ -41,68 +41,16 @@ module.exports = {
                 };
             },
             componentDidMount() {
-                agent.on('unauthorized', this.onUnauthorized);
-                agent.post('/auth').end((err, res) => {
-                    this.setState({
-                        ranAuth: true
-                    });
-                    let user = res.body && res.body.user;
-                    if(!err && user){
-                        core.plugins.login.set('user', user);
-                        this.onLogin(user);
-                        // setTimeout(e => {
-                        //     history.replaceState({}, document.title, '/');
-                        // }, 20)
-                    }
-                })
+                let { login } = core.plugins;
+                login.auth(e => this.setState({ ranAuth: true }));
             },
             componentWillUnmount() {
-                agent.off('unauthorized', this.onUnauthorized);
-            },
-            onUnauthorized(){
-                if(core.plugins.login.get('user')){
-                    core.plugins.login.set('user', null);
-                }
+
             },
             onLogin(user){
                 if(this.props.onLogin){
                     this.props.onLogin(user);
                 }
-            },
-            login(){
-                let { email, password } = this.state;
-                if(this.state.error){ this.setState({ error: null }); }
-                agent.post('/login').send({ email, password }).end((err, res) => {
-                    if(err){
-                        return this.setState({ error: res.text || res.statusText || String(err) })
-                    }
-                    let user = res.body.user;
-                    if(user){
-                        core.plugins.login.set('user', user);
-                        this.onLogin(user);
-                        // setTimeout(e => {
-                        //     history.replaceState({}, document.title, '/');
-                        // }, 20)
-                    }
-                })
-            },
-            signUp(){
-                if(this.state.error){ this.setState({ error: null }); }
-                let { name, email, password } = this.state;
-                agent.post('/signup').send({ name, email, password, parentId: '' }).end((err, res) => {
-                    if(err){
-                        return this.setState({ error: res.text || res.statusText || String(err) })
-                    }
-                    let user = res.body.user;
-                    if(user){
-                        core.plugins.login.set('user', user);
-                        this.onLogin(user);
-                    }
-                })
-            },
-            submit(){
-                let { signup } = this.state;
-                signup ? this.signUp() : this.login();
             },
             handleChange(stateValue) {
                 return (event) => {
@@ -110,12 +58,42 @@ module.exports = {
                 }
             },
 
-            emailField() {
-                let label = core.translate('email', 'Email');
+            nameField() {
+                let label = core.translate('name', 'Name');
+                let { login } = core.plugins;
 
                 const pressEnter = (e) => {
                     if (e.charCode === 13 || e.key === 'Enter' ) {
-                        this.logIn()
+                        login.submit();
+                    }
+                };
+
+                return (
+                    <FormControl style={ styles.formControl} >
+                        <FormHelperText id={'login_email'}>{ label }</FormHelperText>
+                        <TextField
+                            required
+                            autoComplete={ 'off' }
+                            id={ 'login_name' }
+                            value={ this.state.name }
+                            style={ styles.textField }
+                            onChange={ this.handleChange('name') }
+                            margin="normal"
+                            type={ 'text' }
+                            autoFocus={ true }
+                            onKeyPress={ pressEnter }
+                        />
+                    </FormControl>
+                );
+            },
+
+            emailField() {
+                let label = core.translate('email', 'Email');
+                let { login } = core.plugins;
+
+                const pressEnter = (e) => {
+                    if (e.charCode === 13 || e.key === 'Enter' ) {
+                        login.submit();
                     }
                 };
 
@@ -140,10 +118,10 @@ module.exports = {
 
             passwordField() {
                 let label = core.translate('password', 'Password');
-
+                let { login } = core.plugins;
                 const pressEnter = (e) => {
                     if (e.charCode === 13 || e.key === 'Enter' ) {
-                        this.logIn()
+                        login.submit()
                     }
                 };
 
@@ -166,23 +144,23 @@ module.exports = {
             },
 
             errorWarning() {
-                let {error} = this.state;
+                
+                let { login } = core.plugins;
 
-                let errorMsg = core.translate('usernameOrPasswordAreIncorrect', 'Username or Password are incorrect')
-
-                if (error) return (
-                    <Typography
-                        variant={ "body1" }
-                        component={ "div" }
-                        color={ 'error' }
-                        noWrap={ true }
-                        style={ styles.errorMsg }
-                    >
-                        { errorMsg }
-                    </Typography>
-                );
-
-                return null;
+                return login.bind('error', error => 
+                    error ? (
+                        <Typography
+                            variant={ "body1" }
+                            component={ "div" }
+                            color={ 'error' }
+                            noWrap={ true }
+                            style={ styles.errorMsg }
+                        >
+                            { core.translate('usernameOrPasswordAreIncorrect', 'Username or Password are incorrect') }
+                        </Typography>
+                    )
+                    : null
+                )
             },
 
             forgotPwd() {
@@ -199,22 +177,6 @@ module.exports = {
                 });
             },
 
-            renderLoginButton() {
-                let {isWaiting} = this.state;
-
-                if(isWaiting){
-                    return(
-                        <CircularProgress
-                            size={ 20 }
-                            thickness={ 4 }
-                            color={ 'primary' }
-                        />
-                    )
-                }
-
-                return ( core.translate('Sign in') )
-            },
-
             clear() {
                 this.setState({email: '', password: ''});
             },
@@ -225,15 +187,15 @@ module.exports = {
                         style={ {...styles.media, backgroundColor: core.theme('backgrounds.primary')} }
                         title="Simple Switch" >
                         <Typography variant="body1" component="span" style={ {...styles.mediaHeader, color: core.theme('colors.white')} }>
-                            {core.translate('Stemplate', 'Stemplate') }
+                            {core.translate('Login', 'Login') }
                         </Typography>
                     </Card>
                 );
             },
 
             renderButtons() {
-                let { email, password, error, isWaiting } = this.state;
-                let disabled = isWaiting || email.length < 1 || password.length < 1;
+                let { login } = core.plugins;
+                let { email, password, name } = this.state;
 
                 const pressEnter = (e) => {
                     if (e.charCode === 13 || e.key === 'Enter' ) {
@@ -243,27 +205,50 @@ module.exports = {
 
                 return(
                     <CardActions style={ styles.buttonsLine }>
-                        <Button
-                            size="small"
-                            variant="flat"
-                            color="primary"
-                            style={ {...styles.button, color: core.theme('colors.secondary') } }
-                            onClick={ this.clear }
-                            onKeyPress={ pressEnter }
-                        >
-                            { core.translate('Clear') }
-                        </Button>
-                        <Button
-                            size="small"
-                            variant="contained"
-                            // color="primary"
-                            style={ {...styles.button, color: core.theme('colors.white'),  backgroundColor: core.theme('colors.secondary')} }
-                            onClick={ e => core.plugins.login.set('user', { name: 'Koko' }) }
-                            onKeyPress={ pressEnter }
-                            disabled={ disabled }
-                        >
-                            { this.renderLoginButton() }
-                        </Button>
+                        {
+                            login.bind('isInSignUp', isInSignUp => 
+                                <Button
+                                    size="small"
+                                    variant="flat"
+                                    color="primary"
+                                    style={ {...styles.button, color: core.theme('colors.secondary') } }
+                                    onClick={ () => login.set('isInSignUp', !isInSignUp) }
+                                    onKeyPress={(e) => {
+                                        if (e.charCode === 13 || e.key === 'Enter' ) {
+                                            login.set('isInSignUp', !isInSignUp)
+                                        }
+                                    }}
+                                >
+                                    { core.translate(isInSignUp ? 'Log In' : 'Sign Up') }
+                                </Button>
+                            )
+                        }
+                        
+                        {
+                            login.bind('isLoading', isLoading => 
+                                <Button
+                                    size="small"
+                                    variant="contained"
+                                    // color="primary"
+                                    style={ {...styles.button, color: core.theme('colors.white'),  backgroundColor: core.theme('colors.secondary')} }
+                                    onClick={ e => login.submit({ email, password, name }) }
+                                    onKeyPress={ pressEnter }
+                                    disabled={ isLoading || email.length < 1 || password.length < 1 }
+                                >
+                                    {
+                                        isLoading ? (
+                                            <CircularProgress
+                                                size={ 20 }
+                                                thickness={ 4 }
+                                                color={ 'primary' }
+                                            />
+                                        )
+                                        : core.translate('Sign in')
+                                    }
+                                </Button>
+                            )
+                        }
+                            
                     </CardActions>
                 );
             },
@@ -281,8 +266,14 @@ module.exports = {
             },
 
             renderContent() {
+                let { login } = core.plugins;
                 return(
                     <CardContent style={ styles.content }>
+                        {
+                            login.bind('isInSignUp', isInSignUp => 
+                                isInSignUp ? this.nameField() : null
+                            )
+                        }
                         { this.emailField() }
                         { this.passwordField() }
                         { this.errorWarning() }

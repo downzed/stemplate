@@ -1,3 +1,6 @@
+
+let routes = require('./routes.js');
+
 module.exports = {
     name: 'Stemplate',
     tree: require('./tree.js'),
@@ -28,6 +31,12 @@ module.exports = {
     ],
 
     init(definition, done) {
+
+        core.router.config({ 
+            routes,
+            defaultRoute: '/home'
+        });
+
         var _simpleOptions = {
             BaseApi: 'http://some.ip.for/api',
             getInitialFiles: (callback) => {

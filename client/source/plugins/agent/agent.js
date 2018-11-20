@@ -7,11 +7,12 @@ var authToken = localStorage.getItem('agent.token') || null;
 agent.token = authToken;
 
 function setToken(token){
-  if(!token || (authToken === token)){ return; }
   authToken = token;
   localStorage.setItem('agent.token', token);
   agent.token = authToken;
 }
+
+agent.setToken = setToken;
 
 
 agent.use(function(request){

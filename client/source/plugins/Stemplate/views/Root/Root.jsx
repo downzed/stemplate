@@ -1,4 +1,3 @@
-var routes = require('./routes');
 
 const navOpenedWidth = 180;
 const navClosedWidth = 60;
@@ -12,18 +11,19 @@ module.exports = {
     },
     dependencies: [
         'Stemplate.Mixin',
-        'componentsCollection.TopBar',
-        'componentsCollection.Nav',
-        'popovers.Notify',
-        'popovers.Popup',
-        'popovers.Caution',
-        'popovers.Lightbox',
-        'componentsCollection.Loader',
-        'router.Router',
+        'ui.TopBar',
+        'ui.Nav',
+        // 'popovers.Notify',
+        // 'popovers.Popup',
+        // 'popovers.Caution',
+        // 'popovers.Lightbox',
+        'ui.Loader',
         'snackbar.Snackbar',
         'login.Login',
     ],
-    get(Mixin, TopBar, Nav, Notify, Popup, Caution, Lightbox, Loader, Router, Snackbar, Login) {
+    get(Mixin, TopBar, Nav, 
+        // Notify, Popup, Caution, Lightbox, 
+        Loader, Snackbar, Login) {
 
         var core = this;
         var { React, PropTypes } = core.imports;
@@ -61,10 +61,10 @@ module.exports = {
             },
 
             start() {
-                core.plugins.Stemplate.getInitialFiles(()=>{
-                    this.getLanguage();
-                    this.initialUnits();
-                });
+                // core.plugins.Stemplate.getInitialFiles(()=>{
+                //     this.getLanguage();
+                //     this.initialUnits();
+                // });
                 // this.getDataExample();
             },
 
@@ -114,10 +114,6 @@ module.exports = {
                 this.setState({activeView:route.name});
             },
 
-            addNotification({text, alertKind}){
-                core.plugins.popovers.addNotify(text, alertKind);
-            },
-
             styles(s,place = {}) {
 
                 let styles = {
@@ -132,13 +128,13 @@ module.exports = {
 
                     content: {
                         position: 'absolute',
-                        top:  this.units.appBarHeight,
+                        top:  core.dim("appBar.height"),
                         left: this.state.navWidth,
                         transition: 'all 0.25s ease-out 0s',
                         bottom: 0,
                         right: 0,
                         overflow: 'hidden',
-                        backgroundColor: this.backgrounds.content,
+                        backgroundColor: core.theme('backgrounds.content'),
                         padding: 12
                     },
                 }
@@ -146,39 +142,23 @@ module.exports = {
             },
 
             render() {
-                let { activeView, start, navWidth } = this.state;
-                // let { isLoggedIn } = this.props;
-
-                // let authToken = localStorage.getItem('authToken');
-                // let currentUser = (localStorage.currentUser) ? JSON.parse(localStorage.getItem('currentUser')) : {};
-
-                if (!start) { return <Loader show={true} /> }
-
-                // if(activeView == 'login' || !isLoggedIn) {
-                //     return(
-                //         <div style={ this.styles('root') }>
-                //             <Login onLoggedIn={ this.handleLoggedIn }/>
-                //             <Notify />
-                //             <Popup />
-                //         </div>
-                //     );
-                // }
-                // else return(
+                let { activeView, navWidth } = this.state;
 
                 return (
                     <Login>
                         <div style={ this.styles('root') }>
-                            <Lightbox />
+                            {/* <Lightbox /> */}
                             <TopBar handleNavState={() => {this.setState({navWidth: (navWidth === navClosedWidth) ? navOpenedWidth : navClosedWidth})}} navWidth={navWidth} navIsOpen={navWidth === navOpenedWidth} />
                             <Nav handleViews={this.handleNav} activeView={activeView} navWidth={navWidth} />
                             
-                            <Notify />
+                            {/* <Notify />
                             <Popup />
-                            <Caution />
+                            <Caution /> */}
                             <Snackbar />
 
                             <div style={ this.styles('content') }>
-                            <Router routes={routes} defaultRoute={'/home'}  onNavigation={this.onNavigation} />
+                                { core.router.render() }
+                            {/* <Router routes={routes} defaultRoute={'/home'}  onNavigation={this.onNavigation} /> */}
                             </div>
                         </div>
                     </Login>

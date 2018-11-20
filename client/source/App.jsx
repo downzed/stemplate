@@ -10,20 +10,19 @@ core.injector.loadContext('Stemplate', require.context('./', true, /.*\.module\.
 
 core.plugin([
     
-    require('./plugins/translate'),
-    require('./plugins/request'),
-    require('./plugins/router'),
-
-    require('./plugins/access'),
     require('./plugins/agent'),
-    require('./plugins/login'),
+    require('./plugins/core.plugin.state'),
+    require('./plugins/core.plugin.widget'),
     require('./plugins/interact'),
-    
-    require('./plugins/componentsCollection'),
-    require('./plugins/popovers'),
-    require('./plugins/gallery'),
-    require('./plugins/widgetManager'),
+    require('./plugins/login'),
+    require('./plugins/theme'),
+    require('./plugins/translate'),
+    require('./plugins/popup'),
+    require('./plugins/menu'),
+    require('./plugins/router'),
+    require('./plugins/inputs'),
     require('./plugins/snackbar'),
+    require('./plugins/ui'),
     
     require('./plugins/Stemplate'),
 ])

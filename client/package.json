@@ -1,20 +1,12 @@
 {
-  "name": "Stemplate",
+  "name": "stemplate",
   "version": "1.0.0",
   "description": "fed-simple_switch",
   "main": "source/App.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hot": ".\\node_modules\\.bin\\webpack-dev-server --mode development --config webpack.config.js --progress",
-    "dll": ".\\node_modules\\.bin\\webpack --mode production --config webpack.dll.js",
     "vendor": ".\\node_modules\\.bin\\webpack --mode development --progress --hide-modules --config webpack.dll.js",
-    "vendorIOS": "npm update && ./node_modules/.bin/webpack --mode production --progress --hide-modules --config webpack.dll.js",
-    "start": "npm run watch",
-    "server": "node server",
-    "watch": ".\\node_modules\\.bin\\webpack --mode development --watch --progress --hide-modules --config=./webpack.config.js",
-    "watchIOS": "./node_modules/.bin/webpack --mode development --watch --progress --hide-modules --config=./webpack.config.js",
-    "build": ".\\node_modules\\.bin\\webpack --mode development --progress --hide-modules --config=./webpack.config.js",
-    "development": ".\\node_modules\\.bin\\webpack --mode development --config=./webpack.config.js",
+    "start": ".\\node_modules\\.bin\\webpack --mode development --watch --progress --hide-modules --config=./webpack.config.js",
     "production": ".\\node_modules\\.bin\\webpack --mode production --config=./webpack.config.js"
   },
   "author": "",
